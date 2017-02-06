@@ -34,7 +34,7 @@ def on_hangout_call(bot, event, command):
             else:
                 """subsequent calls for a GROUP"""
                 yield from bot.coro_send_message(event.conv_id,
-                    _("<b>It's been {} since the last call. The last caller was <i>{}</i>.</b>").format(humantime, lastcaller))
+                    _("<b>It's been {} since the last call. The last caller was <i>{}</i>. <br><br> To prevent accidental calls, remove the microphone permission from the hangout app.</b>").format(humantime, lastcaller))
 
         else:
             """first ever call for any conversation"""
@@ -42,4 +42,3 @@ def on_hangout_call(bot, event, command):
                 _("<b>No prizes for that call</b>"))
 
         bot.conversation_memory_set(event.conv_id, "lastcall", { "caller": event.user.full_name, "timestamp": time.time() })
-
